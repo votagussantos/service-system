@@ -364,3 +364,13 @@ describe('edição parcial pelo técnico', () => {
     expect(r2.dados.cliente_id).toBe(ids.cliente);
   });
 });
+
+describe('filtros da lista de OS', () => {
+  it('filtra por cliente e por garantia vigente', async () => {
+    const porCliente = await admin.get(`/ordens?cliente_id=${ids.cliente}`);
+    expect(porCliente.dados.itens.every((o: any) => o.cliente_id === ids.cliente)).toBe(true);
+    const garantia = await admin.get('/ordens?garantia=1');
+    expect(garantia.dados.total).toBe(2);
+    expect(garantia.dados.itens.every((o: any) => o.em_garantia === 1)).toBe(true);
+  });
+});

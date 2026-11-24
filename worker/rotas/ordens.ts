@@ -289,6 +289,17 @@ ordens.get('/', exigirLogin(), async (c) => {
       params.push(...lista);
     }
   }
+  for (const campo of ['cliente_id', 'condominio_id'] as const) {
+    const v = Number(c.req.query(campo));
+    if (v) {
+      where.push(`o.${campo} = ?`);
+      params.push(v);
+    }
+  }
+  if (c.req.query('garantia') === '1') {
+    where.push("o.status = 'concluida' AND o.garantia_ate >= ?");
+    params.push(dataSP());
+  }
   const tecnico = Number(c.req.query('tecnico_id'));
   if (tecnico) {
     where.push('(o.tecnico_id = ? OR o.ajudante_id = ?)');

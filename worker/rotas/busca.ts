@@ -180,7 +180,7 @@ busca.get('/painel', exigirLogin(), async (c) => {
       `SELECT
          SUM(o.status IN ('aberta', 'agendada', 'em_andamento')) AS pendentes,
          SUM(o.status = 'em_andamento') AS em_andamento,
-         SUM(o.status IN ('aberta', 'agendada', 'em_andamento') AND date(o.data_agendada, '-3 hours') = ?) AS hoje,
+         SUM(o.status IN ('aberta', 'agendada', 'em_andamento') AND date(o.data_agendada, '-3 hours') = ?) AS agendadas_hoje,
          SUM(o.status = 'aberta' AND o.tecnico_id IS NULL) AS sem_tecnico,
          SUM(o.status = 'concluida' AND date(o.concluida_em, '-3 hours') >= ?) AS concluidas_mes,
          SUM(CASE WHEN o.status = 'concluida' AND date(o.concluida_em, '-3 hours') >= ? THEN o.valor_total ELSE 0 END) AS faturado_mes,
