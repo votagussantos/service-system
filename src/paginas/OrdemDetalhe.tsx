@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router';
 import {
+  Alert,
   App,
   Button,
   Card,
@@ -142,9 +143,7 @@ export function PaginaOrdemDetalhe() {
       </Flex>
 
       {o.status === 'cancelada' && (
-        <Card size="small" style={{ marginBottom: 16, borderColor: '#ffccc7', background: '#fff2f0' }}>
-          <b>Cancelada:</b> {o.motivo_cancelamento}
-        </Card>
+        <Alert type="error" showIcon style={{ marginBottom: 16 }} title={<><b>Cancelada:</b> {o.motivo_cancelamento}</>} />
       )}
 
       <Row gutter={[16, 16]}>

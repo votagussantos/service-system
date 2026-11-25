@@ -45,7 +45,7 @@ export function ListaOrdens({ ordens, carregando, mostrarValor = true }: { orden
                   {o.condominio_nome ? ` · ${o.condominio_nome}` : ''}
                 </div>
                 <div>{enderecoCurto(o)}</div>
-                {o.problema && <div style={{ color: '#444' }}>{o.problema}</div>}
+                {o.problema && <div style={{ color: 'var(--texto)' }}>{o.problema}</div>}
                 <Space size={12} style={{ fontSize: 12 }}>
                   {o.tecnico_nome && <span>Técnico: {o.tecnico_nome}</span>}
                   {mostrarValor && o.valor_total !== null && <span>{dinheiro(o.valor_total)}</span>}

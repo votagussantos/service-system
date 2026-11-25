@@ -140,7 +140,7 @@ export function PaginaOrdens() {
               render: (_, o) => (
                 <>
                   <b>{o.cliente_nome}</b>
-                  <div style={{ fontSize: 12, color: '#667085' }}>
+                  <div className="texto-fraco">
                     {o.condominio_nome ? `${o.condominio_nome} · ` : ''}
                     {enderecoCurto(o)}
                   </div>

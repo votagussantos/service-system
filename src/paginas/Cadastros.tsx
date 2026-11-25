@@ -25,7 +25,7 @@ export function PaginaClientes() {
         podeEditar={pode('admin', 'atendente')}
         valoresIniciais={{ tipo: 'PF' }}
         colunas={[
-          { title: 'Nome', dataIndex: 'nome', render: (v, c) => (<><b>{v}</b>{c.cpf_cnpj && <div style={{ fontSize: 12, color: '#888' }}>{c.cpf_cnpj}</div>}</>) },
+          { title: 'Nome', dataIndex: 'nome', render: (v, c) => (<><b>{v}</b>{c.cpf_cnpj && <div className="texto-fraco">{c.cpf_cnpj}</div>}</>) },
           { title: 'Telefone', dataIndex: 'telefone' },
           { title: 'Endereço', render: (_, c) => (<>{enderecoCurto(c)}{c.condominio_nome && <div style={{ fontSize: 12 }}>🏢 {c.condominio_nome}</div>}</>) },
           { title: 'Serviços', dataIndex: 'total_os', width: 110, render: (n, c) => (n ? <span>{n} · {relativo(c.ultima_os_em)}</span> : <Tag>Novo</Tag>) },
@@ -229,7 +229,7 @@ export function PaginaServicos() {
       podeEditar={pode('admin')}
       valoresIniciais={{ ativo: true }}
       colunas={[
-        { title: 'Serviço', dataIndex: 'nome', render: (v, s) => (<><b>{v}</b>{s.descricao && <div style={{ fontSize: 12, color: '#888' }}>{s.descricao}</div>}</>) },
+        { title: 'Serviço', dataIndex: 'nome', render: (v, s) => (<><b>{v}</b>{s.descricao && <div className="texto-fraco">{s.descricao}</div>}</>) },
         { title: 'Categoria', dataIndex: 'categoria' },
         { title: 'Garantia', dataIndex: 'garantia_dias', render: (d) => (d === null ? 'Padrão da empresa' : d === 0 ? 'Sem garantia' : `${d} dias`) },
         { title: 'Preços', dataIndex: 'total_precos', width: 80 },
@@ -295,7 +295,7 @@ export function PaginaPrecos() {
         />
       }
       colunas={[
-        { title: 'Serviço', dataIndex: 'servico_nome', render: (v, p) => (<><b>{v}</b><div style={{ fontSize: 12, color: '#888' }}>{p.servico_categoria}</div></>) },
+        { title: 'Serviço', dataIndex: 'servico_nome', render: (v, p) => (<><b>{v}</b><div className="texto-fraco">{p.servico_categoria}</div></>) },
         { title: 'Variação', dataIndex: 'descricao' },
         { title: 'Unidade', dataIndex: 'unidade', width: 100 },
         { title: 'Valor', dataIndex: 'valor', width: 140, align: 'right', render: (v) => <span className="tabela-preco-valor">{dinheiro(v)}</span> },

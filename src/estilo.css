@@ -1,55 +1,81 @@
 :root {
   --cor-primaria: #0b5cad;
   --fundo: #f3f5f8;
+  --superficie: #ffffff;
+  --borda: #e8ebf0;
+  --borda-forte: #c5ccd6;
+  --texto: rgba(0, 0, 0, 0.88);
+  --texto-sec: #667085;
+  --texto-fraco: #8c8c8c;
+  --tracejado: #eeeeee;
+  --foto-fundo: #e9edf2;
+  color-scheme: light;
+}
+:root[data-tema='escuro'] {
+  --cor-primaria: #3b8ee6;
+  --fundo: #000000;
+  --superficie: #141414;
+  --borda: #2a2a2a;
+  --borda-forte: #4a4a4a;
+  --texto: rgba(255, 255, 255, 0.88);
+  --texto-sec: #a3a9b3;
+  --texto-fraco: #8a8f98;
+  --tracejado: #2f2f2f;
+  --foto-fundo: #1f1f1f;
+  color-scheme: dark;
 }
 * { box-sizing: border-box; }
 html, body, #root { margin: 0; min-height: 100%; }
-body { background: var(--fundo); -webkit-tap-highlight-color: transparent; }
+body { background: var(--fundo); color: var(--texto); -webkit-tap-highlight-color: transparent; }
+.texto-sec { color: var(--texto-sec); }
+.texto-fraco { font-size: 12px; color: var(--texto-fraco); }
+.linha-tracejada { border-bottom: 1px dashed var(--tracejado); padding-bottom: 8px; margin-bottom: 8px; }
 
 .cabecalho {
-  background: #fff;
+  background: var(--superficie);
   padding: 8px 16px;
-  border-bottom: 1px solid #e8ebf0;
+  border-bottom: 1px solid var(--borda);
   position: sticky;
   top: 0;
   z-index: 10;
   min-height: 56px;
   padding-top: max(8px, env(safe-area-inset-top));
 }
-.menu-lateral { border-right: 1px solid #e8ebf0; position: sticky; top: 0; height: 100vh; overflow: auto; }
+.menu-lateral { border-right: 1px solid var(--borda); position: sticky; top: 0; height: 100vh; overflow: auto; }
 .conteudo { padding: 24px; max-width: 1280px; width: 100%; margin: 0 auto; }
 
 .layout-celular { min-height: 100vh; background: var(--fundo); }
 .layout-celular .conteudo { padding: 12px 12px calc(80px + env(safe-area-inset-bottom)); }
 .barra-inferior {
   position: fixed; bottom: 0; left: 0; right: 0; z-index: 20;
-  display: flex; background: #fff; border-top: 1px solid #e3e6eb;
+  display: flex; background: var(--superficie); border-top: 1px solid var(--borda);
   padding-bottom: env(safe-area-inset-bottom);
 }
 .barra-inferior button {
   flex: 1; border: 0; background: none; padding: 8px 2px 6px; min-height: 58px;
   display: flex; flex-direction: column; align-items: center; gap: 2px;
-  font-size: 11px; color: #667085; cursor: pointer;
+  font-size: 11px; color: var(--texto-sec); cursor: pointer;
 }
 .barra-inferior button .anticon { font-size: 21px; }
 .barra-inferior button.ativo { color: var(--cor-primaria); font-weight: 600; }
 
 .cartao-lista { margin-bottom: 8px; }
 .cartao-titulo { font-weight: 600; overflow: hidden; text-overflow: ellipsis; }
-.cartao-desc { color: #667085; font-size: 13px; margin-top: 2px; }
+.cartao-desc { color: var(--texto-sec); font-size: 13px; margin-top: 2px; }
 
 .quadro-assinatura {
-  width: 100%; height: 180px; background: #fff; border: 2px dashed #c5ccd6; border-radius: 8px;
+  /* fundo sempre branco: a assinatura é um "papel" e sai impressa assim */
+  width: 100%; height: 180px; background: #fff; border: 2px dashed var(--borda-forte); border-radius: 8px;
   touch-action: none; display: block;
 }
 .galeria { display: grid; grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); gap: 8px; }
-.galeria .foto { position: relative; aspect-ratio: 1; border-radius: 8px; overflow: hidden; background: #e9edf2; }
+.galeria .foto { position: relative; aspect-ratio: 1; border-radius: 8px; overflow: hidden; background: var(--foto-fundo); }
 .galeria .foto img { width: 100%; height: 100%; object-fit: cover; }
 .galeria .foto .acao { position: absolute; top: 4px; right: 4px; }
 .galeria .foto .marca { position: absolute; bottom: 4px; left: 4px; }
 
 .botao-grande { height: 52px !important; font-size: 16px !important; }
-.secao-titulo { font-size: 13px; text-transform: uppercase; letter-spacing: .04em; color: #667085; margin: 16px 0 8px; font-weight: 600; }
+.secao-titulo { font-size: 13px; text-transform: uppercase; letter-spacing: .04em; color: var(--texto-sec); margin: 16px 0 8px; font-weight: 600; }
 .numero-os { font-variant-numeric: tabular-nums; font-weight: 700; }
 .tabela-preco-valor { font-variant-numeric: tabular-nums; white-space: nowrap; }
 
@@ -57,7 +83,8 @@ body { background: var(--fundo); -webkit-tap-highlight-color: transparent; }
 .tela-login .ant-card { width: 100%; max-width: 400px; }
 
 /* Impressão da OS */
-.impressao { background: #fff; color: #000; max-width: 820px; margin: 0 auto; padding: 24px; font-size: 13px; }
+/* A impressão é sempre clara (papel), mesmo no modo escuro. */
+.impressao { background: #fff; color: #000; color-scheme: light; max-width: 820px; margin: 0 auto; padding: 24px; font-size: 13px; }
 .impressao table { width: 100%; border-collapse: collapse; }
 .impressao th, .impressao td { border: 1px solid #999; padding: 4px 6px; text-align: left; vertical-align: top; }
 .impressao .caixa { border: 1px solid #999; padding: 8px; margin-top: 8px; white-space: pre-wrap; min-height: 40px; }
@@ -66,6 +93,6 @@ body { background: var(--fundo); -webkit-tap-highlight-color: transparent; }
 .so-tela { }
 @media print {
   .so-tela { display: none !important; }
-  body { background: #fff; }
+  body { background: #fff !important; }
   .impressao { padding: 0; }
 }

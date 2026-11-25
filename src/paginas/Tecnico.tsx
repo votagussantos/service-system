@@ -186,7 +186,7 @@ export function PaginaMinhasOS() {
                   <div style={{ textAlign: 'right', whiteSpace: 'nowrap', fontSize: 13 }}>
                     {o.data_agendada ? dataHora(o.data_agendada).slice(11) || dataHora(o.data_agendada) : ''}
                     {o.data_agendada && new Date(o.data_agendada).toDateString() !== hoje && (
-                      <div style={{ color: '#667085' }}>{dataHora(o.data_agendada).slice(0, 5)}</div>
+                      <div className="texto-sec">{dataHora(o.data_agendada).slice(0, 5)}</div>
                     )}
                   </div>
                 </Flex>
@@ -427,7 +427,7 @@ export function PaginaAtendimento() {
 
           <Card size="small" style={{ marginTop: 12 }} title="3. Serviços cobrados">
             {itens.map((i, idx) => (
-              <div key={idx} style={{ borderBottom: '1px dashed #eee', paddingBottom: 8, marginBottom: 8 }}>
+              <div key={idx} className="linha-tracejada">
                 <Flex gap={8} align="center">
                   <Input
                     value={i.descricao}

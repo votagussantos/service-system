@@ -535,7 +535,7 @@ export function PaginaOrdemForm() {
             {(campos, { add, remove }) => (
               <>
                 {campos.map(({ key, name }) => (
-                  <Row gutter={8} key={key} align="bottom" style={{ marginBottom: 8, borderBottom: '1px dashed #eee', paddingBottom: 8 }}>
+                  <Row gutter={8} key={key} align="bottom" className="linha-tracejada">
                     <Form.Item name={[name, 'servico_id']} hidden>
                       <Input />
                     </Form.Item>
@@ -607,7 +607,7 @@ export function PaginaOrdemForm() {
               </Form.Item>
             </Col>
             <Col xs={12} md={8} style={{ textAlign: 'right' }}>
-              <div style={{ color: '#667085' }}>Subtotal {dinheiro(subtotal)}</div>
+              <div className="texto-sec">Subtotal {dinheiro(subtotal)}</div>
               <div style={{ fontSize: 22, fontWeight: 700 }}>Total {dinheiro(total)}</div>
               {!!retorno && <Typography.Text type="warning">Retorno em garantia: sem cobrança</Typography.Text>}
             </Col>

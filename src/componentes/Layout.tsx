@@ -3,6 +3,8 @@ import { Outlet, useLocation, useNavigate } from 'react-router';
 import { Badge, Button, Drawer, Dropdown, Flex, Layout, Menu, Tag, Tooltip, Typography } from 'antd';
 import {
   AppstoreOutlined,
+  BgColorsOutlined,
+  CheckOutlined,
   BankOutlined,
   CarOutlined,
   CloudSyncOutlined,
@@ -26,6 +28,7 @@ import { PERFIL_LABEL, type Perfil } from '../../shared/constantes';
 import { useAuth } from '../auth';
 import { useCelular, useOnline } from '../hooks';
 import { useFila } from '../offline/fila';
+import { OPCOES_TEMA, useTema } from '../tema';
 
 interface ItemMenu {
   key: string;
@@ -75,6 +78,7 @@ function IndicadorConexao() {
 
 export function LayoutPrincipal() {
   const { usuario, sair } = useAuth();
+  const { modo, setModo } = useTema();
   const nav = useNavigate();
   const loc = useLocation();
   const celular = useCelular();
@@ -91,10 +95,24 @@ export function LayoutPrincipal() {
   const menuUsuario = {
     items: [
       { key: 'conta', icon: <IdcardOutlined />, label: 'Minha conta / senha' },
+      {
+        key: 'tema',
+        icon: <BgColorsOutlined />,
+        label: 'Tema',
+        children: OPCOES_TEMA.map((t) => ({
+          key: `tema:${t.value}`,
+          label: t.label,
+          icon: modo === t.value ? <CheckOutlined /> : <span style={{ display: 'inline-block', width: 14 }} />,
+        })),
+      },
       { type: 'divider' as const },
       { key: 'sair', icon: <LogoutOutlined />, label: 'Sair', danger: true },
     ],
-    onClick: ({ key }: { key: string }) => (key === 'sair' ? void sair() : nav('/conta')),
+    onClick: ({ key }: { key: string }) => {
+      if (key === 'sair') void sair();
+      else if (key.startsWith('tema:')) setModo(key.slice(5) as typeof modo);
+      else nav('/conta');
+    },
   };
 
   const menu = (
@@ -173,7 +191,7 @@ export function LayoutPrincipal() {
             selectable={false}
             items={menuUsuario.items}
             onClick={(e) => {
-              setMenuAberto(false);
+              if (!e.key.startsWith('tema:')) setMenuAberto(false);
               menuUsuario.onClick(e);
             }}
             style={{ borderInlineEnd: 0, marginTop: 16 }}

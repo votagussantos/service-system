@@ -53,7 +53,7 @@ export function SelecaoRemota<T extends { id: number }>({ endpoint, rotulo, desc
       optionRender={(o) => (
         <div>
           <div>{o.data.label}</div>
-          {o.data.desc && <div style={{ fontSize: 12, color: '#888' }}>{o.data.desc}</div>}
+          {o.data.desc && <div className="texto-fraco">{o.data.desc}</div>}
         </div>
       )}
       onChange={(v) => onChange?.(v ?? null, itens.find((i) => i.id === v) ?? null)}

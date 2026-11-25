@@ -62,7 +62,7 @@ export function PaginaInicio() {
       />
 
       <Row gutter={[12, 12]} style={{ marginBottom: 24 }}>
-        {cartao('Agendadas para hoje', p?.agendadas_hoje, `/ordens${qs({ de: hoje, ate: hoje })}`, '#0b5cad')}
+        {cartao('Agendadas para hoje', p?.agendadas_hoje, `/ordens${qs({ de: hoje, ate: hoje })}`, 'var(--cor-primaria)')}
         {cartao('Pendentes', p?.pendentes, `/ordens${qs({ status: 'aberta,agendada,em_andamento' })}`)}
         {cartao('Em andamento', p?.em_andamento, `/ordens${qs({ status: 'em_andamento' })}`, '#d46b08')}
         {cartao('Sem técnico', p?.sem_tecnico, `/ordens${qs({ status: 'aberta' })}`, p?.sem_tecnico ? '#cf1322' : undefined)}

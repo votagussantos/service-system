@@ -1,8 +1,9 @@
 import { useState } from 'react';
-import { App, Button, Card, Form, Input, Typography } from 'antd';
+import { App, Button, Card, Form, Input, Segmented, Typography } from 'antd';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { api } from '../api';
 import { useAuth } from '../auth';
+import { OPCOES_TEMA, useTema } from '../tema';
 
 export function PaginaLogin() {
   const { entrar, precisaConfigurar, configurar } = useAuth();
@@ -60,6 +61,7 @@ export function PaginaLogin() {
 
 export function PaginaConta() {
   const { usuario, sair } = useAuth();
+  const { modo, setModo } = useTema();
   const { message } = App.useApp();
   const [form] = Form.useForm();
   const [enviando, setEnviando] = useState(false);
@@ -71,6 +73,12 @@ export function PaginaConta() {
           <b>{usuario?.nome}</b>
           <br />
           Login: {usuario?.login}
+        </Typography.Paragraph>
+      </Card>
+      <Card title="Aparência" style={{ marginBottom: 16 }}>
+        <Segmented block value={modo} options={OPCOES_TEMA} onChange={(v) => setModo(v)} />
+        <Typography.Paragraph type="secondary" style={{ margin: '8px 0 0', fontSize: 12 }}>
+          Automático segue o modo claro/escuro do celular ou computador. Vale só para este aparelho.
         </Typography.Paragraph>
       </Card>
       <Card title="Trocar senha">

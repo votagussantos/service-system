@@ -205,7 +205,7 @@ export function PaginaNotas() {
           locale={{ emptyText: <Empty description="Nenhuma nota" /> }}
           columns={[
             { title: 'Nº NFS-e', dataIndex: 'numero', width: 110, render: (v) => v || '—' },
-            { title: 'Cliente', dataIndex: 'cliente_nome', render: (v, n) => (<><b>{v}</b><div style={{ fontSize: 12, color: '#888' }}>{n.cliente_documento}</div></>) },
+            { title: 'Cliente', dataIndex: 'cliente_nome', render: (v, n) => (<><b>{v}</b><div className="texto-fraco">{n.cliente_documento}</div></>) },
             { title: 'OS', dataIndex: 'ordem_numero', width: 80, render: (v, n) => (v ? <a onClick={(e) => { e.stopPropagation(); nav(`/ordens/${n.ordem_id}`); }}>#{v}</a> : '—') },
             { title: 'Competência', dataIndex: 'competencia', width: 110 },
             { title: 'Emissão', dataIndex: 'data_emissao', width: 110, render: dataSimples },

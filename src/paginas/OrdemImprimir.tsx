@@ -1,5 +1,5 @@
 import { useParams } from 'react-router';
-import { Button, Skeleton } from 'antd';
+import { Button, ConfigProvider, Skeleton, theme } from 'antd';
 import { PrinterOutlined } from '@ant-design/icons';
 import { STATUS_OS_LABEL } from '../../shared/constantes';
 import { urlArquivo } from '../api';
@@ -15,7 +15,9 @@ export function PaginaOrdemImprimir() {
   if (!o || !e) return <Skeleton active style={{ padding: 24 }} />;
 
   const fotos = o.fotos.filter((f) => f.r2_key);
+  // A folha é sempre clara (papel), mesmo com o sistema no modo escuro.
   return (
+    <ConfigProvider theme={{ algorithm: theme.defaultAlgorithm }}>
     <div className="impressao">
       <div className="so-tela" style={{ marginBottom: 16, display: 'flex', gap: 8 }}>
         <Button type="primary" icon={<PrinterOutlined />} onClick={() => window.print()}>
@@ -169,5 +171,6 @@ export function PaginaOrdemImprimir() {
         </tbody>
       </table>
     </div>
+    </ConfigProvider>
   );
 }
