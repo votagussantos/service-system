@@ -109,6 +109,16 @@ npm run typecheck
    npm run deploy
    ```
 
+**Publicação automática pelo GitHub (Workers Builds)** — em *Workers & Pages → Create → Import a repository*:
+
+| Campo | Valor |
+|---|---|
+| Build command | `npm run build` |
+| Deploy command | `npx wrangler d1 migrations apply service-system --remote && npx wrangler deploy` |
+| Preview builds | desligado (as prévias usariam o banco de produção) |
+
+O banco (D1 `service-system`) e o bucket R2 (`service-system-arquivos`) precisam existir antes do primeiro deploy.
+
 O endereço final aparece no terminal (algo como `https://service-system.<sua-conta>.workers.dev`).
 Dá para usar um domínio próprio em *Workers & Pages → service-system → Settings → Domains*.
 No primeiro acesso, crie o administrador e cadastre os funcionários.

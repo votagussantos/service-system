@@ -13,15 +13,14 @@
     {
       "binding": "DB",
       "database_name": "service-system",
-      // Troque pelo id gerado em: npx wrangler d1 create service-system
-      "database_id": "00000000-0000-0000-0000-000000000000",
+      "database_id": "cc1710eb-7a68-4e94-996f-7478f3973b74",
       "migrations_dir": "migrations"
     }
   ],
   "r2_buckets": [
     {
       "binding": "ARQUIVOS",
-      // Crie com: npx wrangler r2 bucket create service-system-arquivos
+      // Bucket criado no painel: R2 → service-system-arquivos
       "bucket_name": "service-system-arquivos"
     }
   ]
